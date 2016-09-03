@@ -1,0 +1,2 @@
+# django-webstore
+Django store.
