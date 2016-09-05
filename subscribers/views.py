@@ -25,7 +25,7 @@ def home(request):
 			"title": "Thank you"
 		}
 
-    return render(request, 'home.html', context)
+    return render(request, 'base.html', context)
 
 
 def contact(request):
@@ -54,5 +54,5 @@ def contact(request):
 	context = {
 		"form": form,
 	}
-    
+
 	return render(request, "forms.html", context)
