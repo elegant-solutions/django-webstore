@@ -29,14 +29,16 @@ def home(request):
 
 
 def contact(request):
-	form = ContactForm(request.POST or None)
-	if form.is_valid():
+    title = 'Contact Us'
+    title_align_center = True
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
 		form_email = form.cleaned_data.get("email")
 		form_message = form.cleaned_data.get("message")
 		form_full_name = form.cleaned_data.get("full_name")
 		subject = 'Site contact form'
 		from_email = settings.EMAIL_HOST_USER
-		to_email = [from_email, 'youotheremail@email.com']
+		to_email = [from_email, 'strangesweets301@gmail.com']
 		contact_message = "%s: %s via %s"%(
 				form_full_name,
 				form_message,
@@ -51,8 +53,10 @@ def contact(request):
 				html_message=some_html_message,
 				fail_silently=True)
 
-	context = {
+    context = {
 		"form": form,
+        "title": title,
+        "title_align_center": title_align_center,
 	}
 
-	return render(request, "forms.html", context)
+    return render(request, "forms.html", context)
