@@ -21,7 +21,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', 'subscribers.views.home', name='home'),
-        url(r'^contact/$', 'subscribers.views.contact', name='contact'),
+    url(r'^contact/$', 'subscribers.views.contact', name='contact'),
     url(r'^admin/', admin.site.urls),
 ]
 
