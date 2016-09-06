@@ -55,7 +55,7 @@ class Variation(models.Model):
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
     product = instance
     variations = product.variation_set.all()
-    if variations.count() == 0:
+    if variations.count()= 0:
         new_var = Variation()
         new_var.product = product
         new_var.title = "Default"
