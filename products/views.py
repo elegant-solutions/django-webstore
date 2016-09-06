@@ -3,6 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.db.models import Q
 
 # Creating our product views-- in Django, this is the equivalent of our JS controller. It controls the interaction between user and server, or views and the model.
 
@@ -16,8 +17,18 @@ class ProductListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(*args, **kwargs)
         context["now"] = timezone.now()
+        context["query"] = self.request.GET.get('q')
         return context
 
+    def get_queryset(self, *args, **kwargs):
+        qs = super(ProductListView, self).get_queryset(*args, **kwargs)
+        query = self.request.GET.get('q')
+        if query:
+            qs = self.model.objects.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
+        return qs
 
 class ProductDetailView(DetailView):
     model = Product
