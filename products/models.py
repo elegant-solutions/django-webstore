@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
+from django.utils.text import slugify
 
 
 # Creating our product models
@@ -55,7 +56,7 @@ class Variation(models.Model):
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
     product = instance
     variations = product.variation_set.all()
-    if variations.count()= 0:
+    if variations.count() == 0:
         new_var = Variation()
         new_var.product = product
         new_var.title = "Default"
@@ -64,9 +65,22 @@ def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
 
 post_save.connect(product_post_saved_receiver, sender=Product)
 
-    #slug
-    #inventory?
+def image_upload_to(instance, filename):
+    title = instance.product.title
+    slug = slugify(title)
+    file_extension = filename.split(".")[1]
+    new_filename = "%s.%s"(instance.id, file_extension)
+    return "products/%s/%s" %(slug, new_filename)
 
-    # Product Images
+# Product Images-- Incorporate pillow and ImageField to load images onto our page
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product)
+    image = models.ImageField(upload_to="products/")
+
+    def __unicode__(self):
+        return self.product.title
+
+
+
 
     # Product Categories
