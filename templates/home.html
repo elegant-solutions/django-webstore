@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
 
 {% block head_title %}Welcome | Strange Sweets {% endblock %}
 
 {% block jumbotron %}
+{% if not request.user.is_authenticated %}
 
   <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
     <h1>Navbar example</h1>
     <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
     <p>To see the difference between static and fixed top navbars, just scroll.</p>
-    <p>
-      <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-    </p>
+    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
   </div>
+{% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-sm-6 col-md-3">
-    <h1>{{ title }}</h1>
-    Welcome, {{ user }}
-    <form method="POST" action="">{% csrf_token %}
-    {{ form|crispy }}
-    <input class="btn btn-primary" type="submit" value="Sign In"/>
-    </form>
-  </div>
-</div>
+{% if request.user %}
+  <h1>You are now logged in, {{ request.user }}</h1>
+    {% if queryset %}
+    <h2>Welcome Admins</h2>
+    <table class="table">
+      {% for instance in queryset %}
+        <tr>
+          <td> {{ forloop.counter }}
+          </td>
+          <td> {{ instance.email }}
+          </td>
+          <td> {{ instance.full_name }}
+          </td>
+          <td> {{ instance.timestamp|timesince }} ago
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
 
+{% else %}
+  <div class="row">
+    <div class="col-sm-6 col-md-3">
+      <h1>{{ title }}</h1>
+      Welcome, {{ user }}
+      <form method="POST" action="">{% csrf_token %}
+      {{ form|crispy }}
+        <input class="btn btn-primary" type="submit" value="Sign In"/>
+      </form>
+    </div>
+  </div>
+{% endif %}
 {% endblock %}
