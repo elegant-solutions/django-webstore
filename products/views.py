@@ -17,7 +17,7 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
         obj = self.get_object()
@@ -47,10 +47,15 @@ class ProductListView(ListView):
                 Q(description__icontains=query)
             )
         return qs
-
+        
 class ProductDetailView(DetailView):
     model = Product
     # template_name = "<appname>/<modelname>_detail.html"
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+        instance = self.get_object()
+        context["related"] = sorted(Product.objects.get_related(instance)[:6], key= lambda x: x.title)
+        return context
 
 def product_detail_view_func(request, id):
     #product_instance = Product.objects.get(id=id)

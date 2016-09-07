@@ -18,6 +18,13 @@ class ProductManager(models.Manager):
     def all(self, *args, **kwargs):
         return self.get_queryset().active()
 
+# This is similar to using filter, map, reduce in our blog app.
+
+    def get_related(self, instance):
+        products_one = self.get_queryset().filter(categories__in=instance.categories.all())
+        products_two = self.get_queryset().filter(default=instance.default)
+        qs = (products_one | products_two).exclude(id=instance.id).distinct()
+        return qs
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
@@ -35,6 +42,11 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"pk":self.pk})
 
+    def get_image_url(self):
+        img = self.productimage_set.first()
+        if img:
+            return img.image.url
+        return img
 
 class Variation(models.Model):
     product = models.ForeignKey(Product)

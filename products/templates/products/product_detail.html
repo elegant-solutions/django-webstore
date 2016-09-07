@@ -16,11 +16,11 @@
 <div class="row">
   <div class="col-sm-8">
     <h2>{{ object.title }}</h2>
-    {%if object.productimage_set.count > 0 %}
+
+    {% if object.get_image_url %}
+
     <div>
-      {% for img in object.productimage_set.all %}
-      <img class="img-responsive" src="{{ img.image.url }}"/>
-      {% endfor %}
+      <img class="img-responsive" src="{{ object.get_image_url }}"/>
     </div>
     {% endif %}
       <p class="lead">{{ object.description }}</p>
@@ -42,6 +42,21 @@
     <br />
     <hr />
     <h4> Related Products </h4>
+
+    <div class="row">
+    {% for product in related %}
+      <div class="col-xs-6">
+        <div class="thumbnail text-center">
+          <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
+        {% if product.get_image_url %}
+        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive" src="{{ product.get_image_url }}"/></a><br/>
+          {% endif %}
+
+          </div>
+        </div>
+      {% cycle '' '</div><div class="row">' %}
+      {% endfor %}
+    </div>
   </div>
   <!-- End Product sidebar -->
 </div>
