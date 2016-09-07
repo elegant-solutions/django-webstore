@@ -2,16 +2,20 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.mail import send_mail
 
+from products.models import Product
 from .forms import ContactForm, SignUpForm
 from .models import SignUp
 
 # Create your views here.
 def home(request):
     title = 'Sign Up Now'
+
+    products = Product.objects.all()
     form = SignUpForm(request.POST or None)
     context = {
         'title': title,
-        'form': form
+        'form': form,
+        'products': products
     }
 
     if form.is_valid():
@@ -25,8 +29,8 @@ def home(request):
 			"title": "Thank you"
 		}
 
-    # if request.user.is_authenticated() and request.user:
-    if request.user:
+    if request.user.is_authenticated() and request.user:
+    # if request.user:
         print(SignUp.objects.all())
         queryset = SignUp.objects.all().order_by('-timestamp')
         context = {

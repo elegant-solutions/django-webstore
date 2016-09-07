@@ -2,3 +2,40 @@ body {
   min-height: 2000px;
   padding-top: 70px;
 }
+
+.navbar-fixed-top {
+  margin-bottom: 19px;
+  background-color: #5ACDFF;
+  border-color: #00B2FF;
+}
+
+.navbar-default .navbar-brand {
+  color: #000;
+  font-weight: 900;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #777;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #000;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent !important;
+}
+
+.navbar-toggle:hover {
+  background-color: #00B2FF !important;
+}
+
+.navbar-toggle {
+  background-color: #5ACDFF !important!
+}
+
+.fa-shopping-cart {
+  font-size: 18px;
+  vertical-align: middle;
+  letter-spacing: .5em;
+}

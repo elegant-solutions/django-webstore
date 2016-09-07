@@ -33,3 +33,9 @@ body {
 .navbar-toggle {
   background-color: #5ACDFF !important!
 }
+
+.fa-shopping-cart {
+  font-size: 18px;
+  vertical-align: middle;
+  letter-spacing: .5em;
+}
