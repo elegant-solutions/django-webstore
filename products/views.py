@@ -17,7 +17,7 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(DetailView):
     model = Category
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
         obj = self.get_object()
