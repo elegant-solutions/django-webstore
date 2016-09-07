@@ -7,7 +7,25 @@ from django.db.models import Q
 
 # Creating our product views-- in Django, this is the equivalent of our JS controller. It controls the interaction between user and server, or views and the model.
 
-from .models import Product
+from .models import Product, Category
+
+class CategoryListView(ListView):
+    model = Category
+    queryset = Category.objects.all()
+    template_name = "products/product_list.html"
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
+        obj = self.get_object()
+        product_set = obj.product_set.all()
+        default_products = obj.default_category.all()
+        products = ( product_set | default_products ).distinct
+        context["products"] = products
+        return context
 
 
 class ProductListView(ListView):

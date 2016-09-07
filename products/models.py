@@ -24,6 +24,9 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     active = models.BooleanField(default=True)
+    categories = models.ManyToManyField("Category", blank=True)
+    default = models.ForeignKey("Category", related_name="default_category", null=True, blank=True)
+
     objects = ProductManager()
 
     def __unicode__(self):
@@ -80,7 +83,21 @@ class ProductImage(models.Model):
     def __unicode__(self):
         return self.product.title
 
+# Product Categories
+
+class Category(models.Model):
+    title = models.CharField(max_length=120, unique=True)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(null=True, blank=True)
+    active = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    class Meta:
+        verbose_name_plural = "Categories"
 
 
+    def __unicode__(self):
+        return self.title
 
-    # Product Categories
+    def get_absolute_url(self):
+        return reverse("category_detail", kwargs={"slug":self.slug})

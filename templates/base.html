@@ -24,5 +24,11 @@
 
     </div> <!-- /container -->
     {% include 'javascript.html' %}
+    <script>
+    (function(module){
+      {% block jquery %}
+      {% endblock %}
+    })(window);
+    </script>
  </body>
 </html>
