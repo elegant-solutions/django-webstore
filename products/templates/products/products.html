@@ -3,7 +3,7 @@
 <div class="row">
 {% for product in object_list %}
 
-<div class="col-xs-4 {{ col_class_set }}">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
   <div class="thumbnail text-center">
     <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
   {% if product.get_image_url %}
@@ -12,9 +12,6 @@
 
     </div>
   </div>
-{% if not col_class_set %}
-{% cycle '' '' '</div><div class="row">' %}
-{% endif %}
 {% endfor %}
 
 </div>
