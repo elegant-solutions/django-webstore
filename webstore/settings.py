@@ -150,7 +150,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "img", "media_root")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "django-webstore", "webstore", "static")
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
