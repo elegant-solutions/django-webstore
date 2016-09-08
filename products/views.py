@@ -5,9 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.db.models import Q
 
-# Creating our product views-- in Django, this is the equivalent of our JS controller. It controls the interaction between user and server, or views and the model.
-
 from .models import Product, Category
+# Creating our product views-- in Django, this is the equivalent of our JS controller. It controls the interaction between user and server, or views and the model.
 
 class CategoryListView(ListView):
     model = Category
@@ -47,10 +46,10 @@ class ProductListView(ListView):
                 Q(description__icontains=query)
             )
         return qs
-        
+
+
 class ProductDetailView(DetailView):
     model = Product
-    # template_name = "<appname>/<modelname>_detail.html"
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
         instance = self.get_object()
@@ -58,8 +57,6 @@ class ProductDetailView(DetailView):
         return context
 
 def product_detail_view_func(request, id):
-    #product_instance = Product.objects.get(id=id)
-    #product_instance = get_object_or_404(Product, id=id)
     try:
         product_instance = Product.objects.get(id=id)
     except Product.DoesNotExist:
