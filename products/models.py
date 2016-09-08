@@ -87,7 +87,7 @@ def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
         new_var.price = product.price
         new_var.save()
 
-post_save.connect(product_post_saved_receiver, sender=Product)
+# post_save.connect(product_post_saved_receiver, sender=Product)
 
 def image_upload_to(instance, filename):
     title = instance.product.title
