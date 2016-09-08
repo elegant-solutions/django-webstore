@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
@@ -48,9 +49,24 @@ class CartView(SingleObjectMixin, View):
 			else:
 				cart_item.quantity = qty
 				cart_item.save()
+			if not request.is_ajax():
+				return HttpResponseRedirect(reverse("cart"))
 
 		if request.is_ajax():
-			return JsonResponse({"deleted": delete_item, "item_added": item_added})
+			try:
+				total = cart_item.line_item_total
+			except:
+				total = None
+			try:
+				subtotal = cart_item.cart.subtotal
+			except:
+				subtotal = None
+			data = {"deleted": delete_item,
+					"item_added": item_added,
+					"line_total": total,
+					"subtotal": subtotal,
+					}
+			return JsonResponse(data)
 
 		context = {
 			"object": self.get_object()

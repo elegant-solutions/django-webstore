@@ -3,7 +3,33 @@
 <script>
   {% block jquery %}
   $('.item-qty').change(function(){
-    $(this).next('.btn-update').fadeIn(500);
+    // $(this).next('.btn-update').fadeIn(500);
+
+    // event.preventDefault();
+    var item = $(this).prev("input[type='hidden']").val();
+    var qty = $(this).val();
+    var data = {
+      item: item,
+      qty: qty
+    }
+    $.ajax({
+      type: "GET",
+      url: "{% url 'cart' %}",
+      data: data,
+      success: function(data) {
+        $('#jquery-message').text("Added " + data.item_added + " Deleted " + data.deleted);
+        if (data.deleted){
+            $("#item-"+item).fadeOut();
+        } else {
+          $("#item-line-total-"+item).text(data.line_total);
+          $("#subtotal").text(data.subtotal);
+        }
+      },
+      error: function(response, error) {
+        $('#add-form').submit();
+      }
+    })
+
   })
   {% endblock %}
 </script>
@@ -12,27 +38,28 @@
 
 <table class="table">
 {% for item in object.cartitem_set.all %}
-  <tr>
-    <form action="." method="GET">
+  <tr id="item-{{ item.item.id }}">
       <td>
         {{ item.item.get_title }}
       </td>
-      <input type="hidden" name="item" value="{{ item.item.id }}"/>
       <td>
+        <form action="." method="GET">
+        <input type="hidden" name="item" value="{{ item.item.id }}"/>
         <input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
         <input type="submit" class="btn-update btn btn-link" style="display:none;" value="Update Item"/>
+      </form>
       </td>
-      <td>
+      <td id="item-line-total-{{ item.item.id }}">
         {{ item.line_item_total }}
+      </td>
       <td class="text-right"><a href="{{ item.remove }}"> Remove </a>
 
       </td>
-  </form>
   </tr>
 {% endfor %}
 
   <tr>
-    <td colspan="4" class="text-right">Subtotal: {{ object.subtotal }}</td>
+    <td id="subtotal" colspan="4" class="text-right">Subtotal: {{ object.subtotal }}</td>
   </tr>
 </table>
 {% endblock %}
