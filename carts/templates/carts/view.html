@@ -44,20 +44,19 @@
       </td>
       <td>
         <form action="." method="GET">
-        <input type="hidden" name="item" value="{{ item.item.id }}"/>
-        <input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
-        <input type="submit" class="btn-update btn btn-link" style="display:none;" value="Update Item"/>
-      </form>
+          <input type="hidden" name="item" value="{{ item.item.id }}"/>
+          <input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
+          <input type="submit" class="btn-update btn btn-link" style="display:none;" value="Update Item"/>
+        </form>
       </td>
       <td id="item-line-total-{{ item.item.id }}">
         {{ item.line_item_total }}
       </td>
-      <td class="text-right"><a href="{{ item.remove }}"> Remove </a>
-
+      <td class="text-right">
+        <a href="{{ item.remove }}"> Remove </a>
       </td>
   </tr>
-{% endfor %}
-
+  {% endfor %}
   <tr>
     <td id="subtotal" colspan="4" class="text-right">Subtotal: {{ object.subtotal }}</td>
   </tr>

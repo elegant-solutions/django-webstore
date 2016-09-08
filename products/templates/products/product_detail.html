@@ -18,7 +18,7 @@
         url: "{% url 'cart' %}",
         data: formData,
         success: function(data) {
-          $('#jquery-message').text("Added " + data.item_added + " Deleted " + data.deleted);
+          $('#jquery-message').html("{{ product }} added to your cart!").fadeIn();
         },
         error: function(response, error) {
           $('#add-form').submit();
@@ -29,23 +29,22 @@
 </script>
 
 {% block content %}
-<div class="row">
+<section class="row">
   <div class="col-sm-8">
     <h2>{{ object.title }}</h2>
-
     {% if object.get_image_url %}
-
     <div>
       <img class="img-responsive" src="{{ object.get_image_url }}"/>
     </div>
     {% endif %}
       <p class="lead">{{ object.description }}</p>
   </div>
+
   <!-- Product Sidebar -->
   <div class="col-sm-4">
     <h3 id="price"> {{ object.price }} </h3>
     <form id="add-form" method="GET" action="{% url 'cart' %}">
-      <p id="jquery-message" class="lead"></p>
+      <p id="jquery-message" class="bg-success"></p>
       <select name="item" class="form-control variation_select">
         {% for vari_obj in object.variation_set.all %}
         <option data-price="{{ vari_obj.price }}" value="{{ vari_obj.id }}">
@@ -59,12 +58,12 @@
     </form>
     <br />
     <hr />
-    <h4> Related Products </h4>
 
+    <!-- Related Products -->
+    <h3> Related Products </h3><hr/>
     <div class="row">
     {% for product in related %}
-      <div class="col-sm-6">
-        <div class="thumbnail text-center">
+      <div class="col-sm-6 thumbnail text-center">
         {% if product.get_image_url %}
         <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive" src="{{ product.get_image_url }}"/></a><br/>
           {% endif %}
@@ -72,10 +71,10 @@
             <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
           </div>
         </div>
-      </div>
       {% endfor %}
     </div>
   </div>
+
   <!-- End Product sidebar -->
-</div>
+</section>
 {% endblock %}
