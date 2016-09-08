@@ -9,6 +9,22 @@
       })
     };
     setPrice();
+
+    $('#submit-btn').click(function(event){
+      event.preventDefault();
+      var formData = $('#add-form').serialize();
+      $.ajax({
+        type: "GET",
+        url: "{% url 'cart' %}",
+        data: formData,
+        success: function(data) {
+          $('#jquery-message').text("Added " + data.item_added + " Deleted " + data.deleted);
+        },
+        error: function(response, error) {
+          $('#add-form').submit();
+        }
+      })
+    });
   {% endblock %}
 </script>
 
@@ -28,7 +44,8 @@
   <!-- Product Sidebar -->
   <div class="col-sm-4">
     <h3 id="price"> {{ object.price }} </h3>
-    <form method="GET" action="{% url 'cart' %}">
+    <form id="add-form" method="GET" action="{% url 'cart' %}">
+      <p id="jquery-message" class="lead"></p>
       <select name="item" class="form-control variation_select">
         {% for vari_obj in object.variation_set.all %}
         <option data-price="{{ vari_obj.price }}" value="{{ vari_obj.id }}">
@@ -38,7 +55,7 @@
       </select>
       <input class="form-control" type="number" name="qty" value="1" />
       <br />
-      <input type="submit" class="btn btn-default" value="Add to Cart"/>
+      <input id="submit-btn" type="submit" class="btn btn-default" value="Add to Cart"/>
     </form>
     <br />
     <hr />
