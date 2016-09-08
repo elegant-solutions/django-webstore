@@ -1,3 +1,58 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.navbar-brand {
+  font-family: "Shrikhand", cursive;
+  font-size: 30px;
+}
+
+.jumbotron h1 {
+  font-family: "Shrikhand", cursive;
+  font-size: 80px;
+}
 .text-align-center {
   text-align: center;
+}
+
+.jumbotron {
+  background-color: #e5fff2;
+}
+
+.btn {
+  background-color: #ff9998 !important;
+  border-style: none;
+  color: black;
+}
+
+img {
+  width: 75%;
+}
+
+.thumbnail {
+  border: none !important;
+}
+
+a {
+  color: black;
+  font-size: 25px;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #grey;
+}
+
+.container-fluid {
+  width: 90%;
+}
+
+.allProds {
+  margin-bottom: 50px;
+  padding-bottom: 5px;
+  border-bottom: solid 5px;
+}
+
+body {
+
 }
