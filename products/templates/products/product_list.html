@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> All Products <small><a href='{% url "categories" %}'>Categories</a></small></h1>
+<h1 class="allProds"> All Products <small><a class="pull-right" href='{% url "categories" %}'>Categories</a></small></h1>
 
 {% include "products/products.html" with object_list=object_list %}
 
