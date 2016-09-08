@@ -1,3 +1,16 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.navbar-brand {
+  font-family: "Shrikhand", cursive;
+  font-size: 30px;
+}
+
+.jumbotron h1 {
+  font-family: "Shrikhand", cursive;
+  font-size: 80px;
+}
 .text-align-center {
   text-align: center;
 }
