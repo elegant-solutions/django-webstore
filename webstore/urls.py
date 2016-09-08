@@ -23,7 +23,7 @@ from carts.views import CartView
 
 urlpatterns = [
     url(r'^$', 'subscribers.views.home', name='home'),
-    url(r'^contact/$', 'subscribers.views.contact', name='contact'),
+    # url(r'^contact/$', 'subscribers.views.contact', name='contact'),
     url(r'^about/$', 'webstore.views.about', name='about'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.default.urls')),
