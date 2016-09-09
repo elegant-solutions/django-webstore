@@ -26,6 +26,13 @@ We had big goals with this project, and sadly did not accomplish all of them. If
 - More developed styling so that the page both looks and functions like a real-world e-commerce site
 - A chat feature, so that if a user has been browsing products for X amount of time, a chat box would open up asking if they have any questioned that can be answered by either a store employee or by a bot.
 
-## Deployment to Heroku
+## Thank you to:
 
-For Britt to fill out?
+Rick Patci
+Munir Ibrahim
+Cris Ewing
+Two Scoops of Django
+Full Stack Python Website: https://www.fullstackpython.com/django.html
+Justin Mitchell for his Try Django tutorials
+Will Weatherford
+Documentation (Django Docs, Python Docs, jQuery Docs, Django Registration Redux, etc.)
