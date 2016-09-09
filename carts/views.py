@@ -26,7 +26,6 @@ class CartView(SingleObjectMixin, View):
 		return cart
 
 	def get(self, request, *args, **kwargs):
-		# import pdb; pdb.set_trace()
 		cart = self.get_object()
 		item_id = request.GET.get("item")
 		delete_item = request.GET.get("delete", False)
