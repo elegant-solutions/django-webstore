@@ -3,9 +3,6 @@
 <script>
   {% block jquery %}
   $('.item-qty').change(function(){
-    // $(this).next('.btn-update').fadeIn(500);
-
-    // event.preventDefault();
     var item = $(this).prev("input[type='hidden']").val();
     var qty = $(this).val();
     var data = {
@@ -29,7 +26,6 @@
         $('#add-form').submit();
       }
     })
-
   })
   {% endblock %}
 </script>

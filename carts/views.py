@@ -4,9 +4,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 
-
-# Create your views here.
-
 from products.models import Variation
 from carts.models import Cart, CartItem
 
