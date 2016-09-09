@@ -28,11 +28,11 @@ We had big goals with this project, and sadly did not accomplish all of them. If
 
 ## Thank you to:
 
-Rick Patci
-Munir Ibrahim
-Cris Ewing
-Two Scoops of Django
-Full Stack Python Website: https://www.fullstackpython.com/django.html
-Justin Mitchell for his Try Django tutorials
-Will Weatherford
-Documentation (Django Docs, Python Docs, jQuery Docs, Django Registration Redux, etc.)
+- Rick Patci
+- Munir Ibrahim
+- Cris Ewing
+- Two Scoops of Django
+- Full Stack Python Website: https://www.fullstackpython.com/django.html
+- Justin Mitchell for his Try Django tutorials
+- Will Weatherford
+- Documentation (Django Docs, Python Docs, jQuery Docs, Django Registration Redux, etc.)
