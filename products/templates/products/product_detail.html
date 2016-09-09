@@ -31,18 +31,18 @@
 
 {% block content %}
 <section class="row">
-  <div class="col-sm-8">
+  <section class="col-sm-8">
     <h2>{{ object.title }}</h2>
     {% if object.get_image_url %}
-    <div>
+    <section>
       <img class="img-responsive" src="{{ object.get_image_url }}"/>
-    </div>
+    </section>
     {% endif %}
       <p class="lead">{{ object.description }}</p>
-  </div>
+  </section>
 
   <!-- Product Sidebar -->
-  <div class="col-sm-4">
+  <section class="col-sm-4">
     <h3 id="price"> {{ object.price }} </h3>
     <form id="add-form" method="GET" action="{% url 'cart' %}">
       <p id="jquery-message" class="bg-success"></p>
@@ -62,19 +62,19 @@
 
     <!-- Related Products -->
     <h3> Related Products </h3><hr/>
-    <div class="row">
+    <section class="row">
     {% for product in related %}
-      <div class="col-sm-6 thumbnail text-center">
+      <section class="col-sm-6 thumbnail text-center">
         {% if product.get_image_url %}
         <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive" src="{{ product.get_image_url }}"/></a><br/>
           {% endif %}
-          <div class="caption">
+          <section class="caption">
             <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
-          </div>
-        </div>
+          </section>
+        </section>
       {% endfor %}
-    </div>
-  </div>
+    </section>
+  </section>
 
   <!-- End Product sidebar -->
 </section>

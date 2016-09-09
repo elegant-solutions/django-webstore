@@ -9,19 +9,19 @@
 {% if not request.user.is_authenticated %}
 
   <!-- Main component for a primary marketing message or call to action -->
-  <div class="jumbotron">
+  <section class="jumbotron">
     <h1>Strange Sweets</h1>
     <p>Ever eaten a bug? Tasted a ball bearing? Now's your chance. Our handmade, locally sourced, curated collection of exquisite delicacies from around the world are yours for the tasting.</p>
     <p>Our top of the line, artificially intelligent robots painstakingly hand craft these organic strange sweets. Rest assured, we put in every BIT of our heart into these goodies. Get ready to take a BYTE out of our offerings.</p>
     <a class="btn btn-lg btn-primary" href="/categories/" role="button">What kinds of sweets? &raquo;</a>
-  </div>
+  </section>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 
-<div class="row">
+<section class="row">
   {% include "products/product_list.html" with object_list=products col_class_set="col-sm-4" %}
-</div>
+</section>
 
 {% endblock %}

@@ -5,9 +5,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save
 
-
 from products.models import Variation
-
 
 # Building our models
 class CartItem(models.Model):

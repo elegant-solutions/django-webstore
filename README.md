@@ -1,43 +1,31 @@
-# Heroku Django Starter Template
+# What is Strange Sweets?
 
-An utterly fantastic project starter template for Django 1.9.
+Strange Sweets is a webstore built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, and Rachael Wisecarver.
+
+You can find our site deployed at https://django-sweets-store.herokuapp.com 
 
 ## Features
 
 - Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
 - Enhancements to Django's static file serving functionality via WhiteNoise
+- Search functionality using Django's Q Lookup
+- Prototype-level user login and registration using Django Registration Redux
+- A fully functional admin page that allows the store owner/admins to add, delete, and modify product offerings
+- Dynamic content loaded using Django templates
+- Persistence maintained using a PostgreSQL Database
+- Key features loaded asynchronously using Ajax
+- RESTful framework implemented using Django routing
+- Responsive, mobile-first design
+- *Deployed using Heroku, thanks to Britt's incredibly hard work and with help from Rick, Chris, and Munir.*
 
-## How to Use
+## Future Development
 
-To use this project, follow these steps:
-
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
-
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-You can replace ``helloworld`` with your desired project name.
+We had big goals with this project, and sadly did not accomplish all of them. If we had just a little more time, we would have implemented the following features:
+- A fully functional login and registration feature, with full email and password authentication and email marketing capabilities
+- A fully functional order form. Once the user adds items to their cart, they should be able to proceed to an order form where they can review and modify their order, if need be, add their billing and shipping address, and process their payment using the Braintree API. The user would then receive an email confirmation of their order status.
+- More developed styling so that the page both looks and functions like a real-world e-commerce site
+- A chat feature, so that if a user has been browsing products for X amount of time, a chat box would open up asking if they have any questioned that can be answered by either a store employee or by a bot.
 
 ## Deployment to Heroku
 
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+For Britt to fill out?
