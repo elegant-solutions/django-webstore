@@ -20,19 +20,45 @@ You can find our site deployed at https://django-sweets-store.herokuapp.com
 
 ## Future Development
 
-We had big goals with this project, and sadly did not accomplish all of them. If we had just a little more time, we would have implemented the following features:
+In time we will implement the following features:
+
 - A fully functional login and registration feature, with full email and password authentication and email marketing capabilities
 - A fully functional order form. Once the user adds items to their cart, they should be able to proceed to an order form where they can review and modify their order, if need be, add their billing and shipping address, and process their payment using the Braintree API. The user would then receive an email confirmation of their order status.
 - More developed styling so that the page both looks and functions like a real-world e-commerce site
-- A chat feature, so that if a user has been browsing products for X amount of time, a chat box would open up asking if they have any questioned that can be answered by either a store employee or by a bot.
+- Adding/improving analytics, testing, SEO, and speed/optimization
+- A chat feature, so that if a user has been browsing products for X amount of time, a chat box would open up asking if they have any questions that can be answered by either a store employee or by a bot.
 
 ## Thank you to:
 
 - Rick Patci
 - Munir Ibrahim
 - Cris Ewing
-- Two Scoops of Django
-- Full Stack Python Website: https://www.fullstackpython.com/django.html
-- Justin Mitchell for his Try Django tutorials
 - Will Weatherford
-- Documentation (Django Docs, Python Docs, jQuery Docs, Django Registration Redux, etc.)
+- Two Scoops of Django
+- Django Docs
+- Python Docs
+- jQuery Docs
+- jQuery UI Docs
+- AJAX and Mozilla Docs
+- Learn Python Book
+- Python Reference Book
+- Full Stack Python Website: https://www.fullstackpython.com/django.html
+- Official Django Tutorial
+- Caktus Blog on Various Django Topics (Templating, Heroku, Static File Setup, etc.)
+- Justin Mitchell for his Django tutorials
+- Django Registration Redux Docs
+- Django Model Manager Docs
+- Django Templates Docs
+- Django Admin Bootstrapped Docs
+- Django Crispy Forms
+- Heroku-Django Starter Template (White Noise & GUnicorn Docs)
+- Django Cookie Cutter Template via Daniel and Audrey Roy Greenfield
+- Django Docs on Signals
+- Django Docs on Sessions
+- Django Docs of Queryset API and Q Lookups
+- Django Docs on SMTP
+- Bootstrap & Boostrap Docs
+- Font Awesome
+- Django HTTP Libraries and Docs
+- RegExr Docs and Testing Site
+- Adobe Color Wheel 
