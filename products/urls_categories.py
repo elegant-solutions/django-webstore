@@ -7,6 +7,7 @@ from .views import CategoryListView, CategoryDetailView
 
 # =========================================================================
 # Enabling RESTful architecture with dynamic urls.
+# Overall url patterns for the categories page within the products app.
 # =========================================================================
 
 urlpatterns = [

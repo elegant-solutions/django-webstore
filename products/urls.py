@@ -6,6 +6,7 @@ from .views import ProductDetailView, ProductListView
 
 # =========================================================================
 # Enabling RESTful architecture with dynamic urls.
+# Overall url patterns for products app.
 # =========================================================================
 
 urlpatterns = [
