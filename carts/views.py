@@ -37,7 +37,7 @@ class CartView(SingleObjectMixin, View):
         cart_id = self.request.session.get("cart_id")
         if cart_id == None:
             cart = Cart()
-            cart.tax_percentage = 0.089
+            # cart.tax_percentage = 0.089
             cart.save()
             cart_id = cart.id
             self.request.session["cart_id"] = cart_id
