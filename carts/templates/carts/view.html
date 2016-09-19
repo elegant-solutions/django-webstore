@@ -21,9 +21,13 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
         if (data.deleted){
             $("#item-"+item).fadeOut();
             $("#subtotal").text("Subtotal: $" + data.subtotal);
+            $("#taxtotal").text("$" + data.tax_total);
+            $("#carttotal").text("$" + data.cart_total);
         } else {
-          $("#item-line-total-"+item).text("Subtotal: $" + data.line_total);
+          $("#item-line-total-"+item).text("$" + data.line_total);
           $("#subtotal").text("Subtotal: $" + data.subtotal);
+          $("#taxtotal").text("$" + data.tax_total);
+          $("#carttotal").text("$" + data.cart_total);
         }
         if (data.total_items === 0) {
           $(".table").fadeOut();
@@ -72,6 +76,12 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
       {% endfor %}
       <tr>
         <td id="subtotal" colspan="4" class="text-right">Subtotal: ${{ object.subtotal }}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-right">Tax (Estimated): <span id='taxtotal'> ${{ object.tax_total }}</span></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-right">Total: <span id='carttotal'> ${{ object.total }}</span></td>
       </tr>
     </table>
   {% endif %}

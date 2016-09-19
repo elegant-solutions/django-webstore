@@ -87,10 +87,20 @@ class CartView(SingleObjectMixin, View):
                 total_items = cart_item.cart.items.count()
             except:
                 total_items = 0
+            try:
+                cart_total = cart_item.cart.total
+            except:
+                cart_total = None
+            try:
+                tax_total = cart_item.cart.tax_total
+            except:
+                tax_total = None
             data = {"deleted": delete_item,
                     "item_added": item_added,
                     "line_total": total,
                     "subtotal": subtotal,
+                    "cart_total": cart_total,
+                    "tax_total": tax_total,
                     "flash_message": flash_message,
                     "total_items": total_items,
                     }
