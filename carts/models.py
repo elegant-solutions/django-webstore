@@ -1,13 +1,11 @@
-#importing resources
 from decimal import Decimal
 from django.db import models
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save
 
 from products.models import Variation
 
-# Building our models
+
 class CartItem(models.Model):
     cart = models.ForeignKey("Cart")
     item = models.ForeignKey(Variation)
@@ -20,14 +18,16 @@ class CartItem(models.Model):
     def remove(self):
         return self.item.remove_from_cart()
 
+
 def cart_item_pre_save_receiver(sender, instance, *args, **kwargs):
     qty = instance.quantity
-    if qty >=1:
+    if qty >= 1:
         price = instance.item.get_price()
         line_item_total = Decimal(qty) * Decimal(price)
         instance.line_item_total = line_item_total
 
 pre_save.connect(cart_item_pre_save_receiver, sender=CartItem)
+
 
 def cart_item_post_save_receiver(sender, instance, *args, **kwargs):
     instance.cart.update_subtotal()
@@ -40,7 +40,8 @@ class Cart(models.Model):
     items = models.ManyToManyField(Variation, through=CartItem)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2,
+                                   default=Decimal('0.00'))
 
     def __unicode__(self):
         return str(self.id)
