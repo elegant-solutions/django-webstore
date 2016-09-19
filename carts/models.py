@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, post_delete
 
 from products.models import Variation
 
@@ -35,6 +35,8 @@ def cart_item_post_save_receiver(sender, instance, *args, **kwargs):
 
 post_save.connect(cart_item_post_save_receiver, sender=CartItem)
 
+post_delete.connect(cart_item_post_save_receiver, sender=CartItem)
+
 
 class Cart(models.Model):
     """ Stores a cart item associated with a user and a cart subtotal. """
@@ -43,6 +45,11 @@ class Cart(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2,
+                                   default=Decimal('0.00'))
+    tax_percentage = models.DecimalField(max_digits=10, decimal_places=5, default=0.089)
+    tax_total = models.DecimalField(max_digits=10, decimal_places=2,
+                                   default=Decimal('0.00'))
+    total = models.DecimalField(max_digits=10, decimal_places=2,
                                    default=Decimal('0.00'))
 
     def __unicode__(self):
@@ -53,5 +60,14 @@ class Cart(models.Model):
         items = self.cartitem_set.all()
         for item in items:
             subtotal += item.line_item_total
-        self.subtotal = subtotal
+        self.subtotal = "%.2f" %(subtotal)
         self.save()
+
+def do_tax_and_total_receiver(sender, instance, *args, **kwargs):
+    subtotal = Decimal(instance.subtotal)
+    tax_total = round(subtotal * Decimal(instance.tax_percentage), 2)  # WA state tax rate consumer goods
+    total = round(subtotal + Decimal(tax_total), 2)
+    instance.tax_total = "%.2f" %(tax_total)
+    instance.total = "%.2f" %(total)
+
+pre_save.connect(do_tax_and_total_receiver, sender=Cart)
