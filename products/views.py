@@ -6,7 +6,11 @@ from django.utils import timezone
 from django.db.models import Q
 
 from .models import Product, Category
-# Creating our product views-- in Django, this is the equivalent of our JS controller. It controls the interaction between user and server, or views and the model.
+'''Creating our product views-- in Django, this is
+the equivalent of our JS controller. It controls
+the interaction between user and server, or
+ views and the model.'''
+
 
 class CategoryListView(ListView):
     model = Category
@@ -22,7 +26,7 @@ class CategoryDetailView(DetailView):
         obj = self.get_object()
         product_set = obj.product_set.all()
         default_products = obj.default_category.all()
-        products = ( product_set | default_products ).distinct
+        products = (product_set | default_products).distinct
         context["products"] = products
         return context
 
@@ -50,11 +54,13 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
         instance = self.get_object()
-        context["related"] = sorted(Product.objects.get_related(instance)[:6], key= lambda x: x.title)
+        context["related"] = sorted(Product.objects.get_related(instance)[:6], key=lambda x: x.title)
         return context
+
 
 def product_detail_view_func(request, id):
     try:
