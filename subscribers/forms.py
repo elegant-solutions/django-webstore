@@ -4,6 +4,7 @@ from .models import SignUp
 
 
 class SignUpForm(forms.ModelForm):
+    """ Data validation for user's email and name input on Sign Up Form. """
     class Meta:
         model = SignUp
         fields = ['full_name', 'email']

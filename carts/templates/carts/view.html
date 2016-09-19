@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 
+<!-- jQuery for Cart View where subtotal updates and messages are displayed
+to the user via vanilla jQuery and AJAX calls to the cart URL. -->
 <script>
   {% block jquery %}
   $('.item-qty').change(function(){
@@ -31,8 +33,8 @@
   {% endblock %}
 </script>
 
+<!-- Cart view table of items in the cart for url /cart/. -->
 {% block content %}
-
 <table class="table">
 {% for item in object.cartitem_set.all %}
   <tr id="item-{{ item.item.id }}">

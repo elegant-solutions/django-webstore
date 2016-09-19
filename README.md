@@ -2,7 +2,7 @@
 
 Strange Sweets is a webstore built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, and Rachael Wisecarver.
 
-You can find our site deployed at https://django-sweets-store.herokuapp.com 
+You can find our site deployed at https://django-sweets-store.herokuapp.com
 
 ## Features
 
@@ -51,14 +51,14 @@ In time we will implement the following features:
 - Django Templates Docs
 - Django Admin Bootstrapped Docs
 - Django Crispy Forms
-- Heroku-Django Starter Template (White Noise & GUnicorn Docs)
+- Heroku-Django Starter Template (White Noise & Gunicorn Docs)
 - Django Cookie Cutter Template via Daniel and Audrey Roy Greenfield
 - Django Docs on Signals
 - Django Docs on Sessions
 - Django Docs of Queryset API and Q Lookups
 - Django Docs on SMTP
-- Bootstrap & Boostrap Docs
+- Bootstrap & Bootstrap Docs
 - Font Awesome
 - Django HTTP Libraries and Docs
 - RegExr Docs and Testing Site
-- Adobe Color Wheel 
+- Adobe Color Wheel

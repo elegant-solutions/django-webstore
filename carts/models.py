@@ -7,6 +7,7 @@ from products.models import Variation
 
 
 class CartItem(models.Model):
+    """ Stores a cart item with quantity and total. """
     cart = models.ForeignKey("Cart")
     item = models.ForeignKey(Variation)
     quantity = models.PositiveIntegerField(default=1)
@@ -18,8 +19,8 @@ class CartItem(models.Model):
     def remove(self):
         return self.item.remove_from_cart()
 
-
 def cart_item_pre_save_receiver(sender, instance, *args, **kwargs):
+    """ Django signals used to pre-store items as user adds items to cart. """
     qty = instance.quantity
     if qty >= 1:
         price = instance.item.get_price()
@@ -28,14 +29,15 @@ def cart_item_pre_save_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(cart_item_pre_save_receiver, sender=CartItem)
 
-
 def cart_item_post_save_receiver(sender, instance, *args, **kwargs):
+    """ Django signals used to post-store items into a subtotal in the user's cart. """
     instance.cart.update_subtotal()
 
 post_save.connect(cart_item_post_save_receiver, sender=CartItem)
 
 
 class Cart(models.Model):
+    """ Stores a cart item associated with a user and a cart subtotal. """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
     items = models.ManyToManyField(Variation, through=CartItem)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)

@@ -8,6 +8,7 @@ from .models import SignUp
 
 
 def home(request):
+    """ Sign up form registration and authentication. """
     title = 'Sign Up Now'
 
     products = Product.objects.all()

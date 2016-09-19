@@ -5,6 +5,9 @@ from django.contrib import admin
 from .models import Cart, CartItem
 
 
+# =========================================================================
+# ----- Custom Admin Classes
+# =========================================================================
 class CartItemInline(admin.TabularInline):
     model = CartItem
 
@@ -17,4 +20,8 @@ class CartAdmin(admin.ModelAdmin):
     class Meta:
         model = Cart
 
+
+# =========================================================================
+# ----- Admin Model Registration
+# =========================================================================
 admin.site.register(Cart, CartAdmin)
