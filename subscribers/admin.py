@@ -4,9 +4,11 @@ from django.contrib import admin
 from .forms import SignUpForm
 from .models import SignUp
 
+
 class SignUpAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'email', 'timestamp', 'updated']
     form = SignUpForm
+
     class Meta:
         model = SignUp
 
