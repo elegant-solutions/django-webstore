@@ -20,7 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from carts.views import CartView
 
-
+# =========================================================================
+# Enabling RESTful architecture with dynamic urls.
+# Overall url patterns for webstore.
+# =========================================================================
 urlpatterns = [
     url(r'^$', 'subscribers.views.home', name='home'),
     url(r'^about/$', 'webstore.views.about', name='about'),

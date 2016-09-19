@@ -1,6 +1,8 @@
+<!-- Dynamically add the following category detail module to our base.html page using Django templates-->
 {% extends "base.html" %}
 
 {% block content %}
+<!-- This block of content dynamically populates the category detail page with the product name, image, and url for each product in the selected category. -->
   <h3>
     {{object}}
   </h3>

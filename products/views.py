@@ -6,10 +6,10 @@ from django.utils import timezone
 from django.db.models import Q
 
 from .models import Product, Category
-'''Creating our product views-- in Django, this is
-the equivalent of our JS controller. It controls
-the interaction between user and server, or
- views and the model.'''
+
+# =========================================================================
+# Enabling queries using Q Lookup based on Category and Product name.
+# =========================================================================
 
 
 class CategoryListView(ListView):
@@ -50,6 +50,9 @@ class ProductListView(ListView):
                 Q(description__icontains=query)
             )
         return qs
+# =========================================================================
+# Creating our product and category views to control the interraction between user and server.
+# =========================================================================
 
 
 class ProductDetailView(DetailView):

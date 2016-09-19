@@ -1,7 +1,9 @@
-{% extends "base.html" %}
+<!-- Dynamically add the following product detail module to our base.html page using Django templates-->
 
+{% extends "base.html" %}
 <script>
   {% block jquery %}
+  //jQuery block to set the price shown on the product detail page based on the variation selected by the user.
     function setPrice(){
       $('.variation_select').change(function(){
         var price = $('.variation_select option:selected').attr('data-price')
@@ -9,7 +11,7 @@
       })
     };
     setPrice();
-
+    //jQuery block which will asynchronously load form data on user's click of form button, and fade in message that product has been added to user's cart
     $('#submit-btn').click(function(event){
       event.preventDefault();
       var formData = $('#add-form').serialize();
@@ -30,6 +32,7 @@
 </script>
 
 {% block content %}
+<!-- Dynamically loads product title, description, image, url for selected product -->
 <section class="row">
   <section class="col-sm-8">
     <h2>{{ object.title }}</h2>
@@ -41,7 +44,7 @@
       <p class="lead">{{ object.description }}</p>
   </section>
 
-  <!-- Product Sidebar -->
+  <!-- Product Sidebar, displays form for adding product variation to cart-->
   <section class="col-sm-4">
     <h3 id="price"> {{ object.price }} </h3>
     <form id="add-form" method="GET" action="{% url 'cart' %}">
@@ -60,7 +63,7 @@
     <br />
     <hr />
 
-    <!-- Related Products -->
+    <!-- Related Products loaded based on item category-->
     <h3> Related Products </h3><hr/>
     <section class="row">
     {% for product in related %}

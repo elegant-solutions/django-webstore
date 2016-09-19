@@ -2,9 +2,10 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+# =========================================================================
+# Q Lookup uses the queryset API in Django to query the product model
+# =========================================================================
 
-
-# Creating our product models
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
@@ -18,8 +19,6 @@ class ProductManager(models.Manager):
     def all(self, *args, **kwargs):
         return self.get_queryset().active()
 
-# This is similar to using filter, map, reduce in our blog app.
-
     def get_related(self, instance):
         products_one = self.get_queryset().filter(categories__in=instance.categories.all())
         products_two = self.get_queryset().filter(default=instance.default)
@@ -27,6 +26,9 @@ class ProductManager(models.Manager):
         return qs
 
 
+# =========================================================================
+# Creating a model for our Product instances, including title, image, url
+# =========================================================================
 class Product(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True, null=True)
@@ -51,6 +53,9 @@ class Product(models.Model):
         return img
 
 
+# =========================================================================
+# Building the model for product variations
+# =========================================================================
 class Variation(models.Model):
     product = models.ForeignKey(Product)
     title = models.CharField(max_length=120)
@@ -81,6 +86,9 @@ class Variation(models.Model):
         return "%s - %s" %(self.product.title, self.title)
 
 
+# =========================================================================
+# Enabling feature to upload and save new product images, information
+# =========================================================================
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
     product = instance
     variations = product.variation_set.all()
@@ -112,9 +120,10 @@ class ProductImage(models.Model):
     def __unicode__(self):
         return self.product.title
 
-# Product Categories
 
-
+# =========================================================================
+# Creating categories for our product instances
+# =========================================================================
 class Category(models.Model):
     title = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(unique=True)
