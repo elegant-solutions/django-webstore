@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-# Create your models here.
 class SignUp(models.Model):
+    """ Stores a user's sign up information. """
     email = models.EmailField()
     full_name = models.CharField(max_length=120, blank=False, null=True)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
