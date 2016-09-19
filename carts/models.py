@@ -46,7 +46,7 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     subtotal = models.DecimalField(max_digits=10, decimal_places=2,
                                    default=Decimal('0.00'))
-    tax_percentage = models.DecimalField(max_digits=10, decimal_places=5, default=0.089)
+    tax_percentage = models.DecimalField(max_digits=10, decimal_places=5, default=Decimal('0.089'))
     tax_total = models.DecimalField(max_digits=10, decimal_places=2,
                                    default=Decimal('0.00'))
     total = models.DecimalField(max_digits=10, decimal_places=2,
