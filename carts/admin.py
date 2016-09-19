@@ -1,7 +1,7 @@
-#Importing resources
+# Stdlib
 from django.contrib import admin
 
-#Registering our Models
+# Django-Webstore
 from .models import Cart, CartItem
 
 
@@ -13,6 +13,7 @@ class CartAdmin(admin.ModelAdmin):
     inlines = [
         CartItemInline
     ]
+
     class Meta:
         model = Cart
 
