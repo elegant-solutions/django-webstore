@@ -65,7 +65,7 @@ class Cart(models.Model):
 
 def do_tax_and_total_receiver(sender, instance, *args, **kwargs):
     subtotal = Decimal(instance.subtotal)
-    tax_total = round(subtotal * Decimal(0.089), 2)  # WA state tax rate consumer goods
+    tax_total = round(subtotal * Decimal(instance.tax_percentage), 2)  # WA state tax rate consumer goods
     total = round(subtotal + Decimal(tax_total), 2)
     instance.tax_total = "%.2f" %(tax_total)
     instance.total = "%.2f" %(total)
