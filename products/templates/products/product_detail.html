@@ -22,6 +22,7 @@
         success: function(data) {
           var $notification = $('#jquery-message').html("{{ product }} added to your cart!").fadeIn();
           $notification.fadeOut(1000);
+          updateCartItemCount();
         },
         error: function(response, error) {
           $('#add-form').submit();

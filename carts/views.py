@@ -8,6 +8,22 @@ from products.models import Variation
 from carts.models import Cart, CartItem
 
 
+class ItemCountView(View):
+    """ Updates item count for shopping cart badge """
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            cart_id = self.request.session.get("cart_id")
+            if cart_id == None:
+                count = 0
+            else:
+                cart = Cart.objects.get(id=cart_id)
+                count = cart.items.count()
+            request.session["cart_item_count"] = count
+            return JsonResponse({"count": count})
+        else:
+            raise Http404
+
+
 class CartView(SingleObjectMixin, View):
     """ Using Django sessions to store cart items in cookies.
     CartView is also used to get/delete items and add up a line and overall
@@ -33,6 +49,7 @@ class CartView(SingleObjectMixin, View):
         cart = self.get_object()
         item_id = request.GET.get("item")
         delete_item = request.GET.get("delete", False)
+        flash_message = ""
         item_added = False
         if item_id:
             item_instance = get_object_or_404(Variation, id=item_id)
@@ -44,10 +61,14 @@ class CartView(SingleObjectMixin, View):
                 raise Http404
             cart_item, created = CartItem.objects.get_or_create(cart=cart, item=item_instance)
             if created:
+                flash_message = "Item successfully added."
                 item_added = True
             if delete_item:
+                flash_message = "Item removed successfully."
                 cart_item.delete()
             else:
+                if not created:
+                    flash_message = "Quantity has been updated successfully."
                 cart_item.quantity = qty
                 cart_item.save()
             if not request.is_ajax():
@@ -62,10 +83,16 @@ class CartView(SingleObjectMixin, View):
                 subtotal = cart_item.cart.subtotal
             except:
                 subtotal = None
+            try:
+                total_items = cart_item.cart.items.count()
+            except:
+                total_items = 0
             data = {"deleted": delete_item,
                     "item_added": item_added,
                     "line_total": total,
                     "subtotal": subtotal,
+                    "flash_message": flash_message,
+                    "total_items": total_items,
                     }
             return JsonResponse(data)
 

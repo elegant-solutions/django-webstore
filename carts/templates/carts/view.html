@@ -20,10 +20,16 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
         $('#jquery-message').text("Added " + data.item_added + " Deleted " + data.deleted);
         if (data.deleted){
             $("#item-"+item).fadeOut();
+            $("#subtotal").text("Subtotal: $" + data.subtotal);
         } else {
-          $("#item-line-total-"+item).text(data.line_total);
-          $("#subtotal").text(data.subtotal);
+          $("#item-line-total-"+item).text("Subtotal: $" + data.line_total);
+          $("#subtotal").text("Subtotal: $" + data.subtotal);
         }
+        if (data.total_items === 0) {
+          $(".table").fadeOut();
+          $(".main-content").text("Cart is empty.")
+        }
+        updateCartItemCount();
       },
       error: function(response, error) {
         $('#add-form').submit();
@@ -35,29 +41,39 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
 
 <!-- Cart view table of items in the cart for url /cart/. -->
 {% block content %}
-<table class="table">
-{% for item in object.cartitem_set.all %}
-  <tr id="item-{{ item.item.id }}">
-      <td>
-        {{ item.item.get_title }}
-      </td>
-      <td>
-        <form action="." method="GET">
-          <input type="hidden" name="item" value="{{ item.item.id }}"/>
-          <input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
-          <input type="submit" class="btn-update btn btn-link" style="display:none;" value="Update Item"/>
-        </form>
-      </td>
-      <td id="item-line-total-{{ item.item.id }}">
-        {{ item.line_item_total }}
-      </td>
-      <td class="text-right">
-        <a href="{{ item.remove }}"> Remove </a>
-      </td>
-  </tr>
-  {% endfor %}
-  <tr>
-    <td id="subtotal" colspan="4" class="text-right">Subtotal: {{ object.subtotal }}</td>
-  </tr>
-</table>
+
+<section class="row main-content">
+  {% if object.cartitem_set.count < 1 %}
+    <section class="col-sm-6 col-sm-offset-3 text-center">
+      <h1> Your cart is empty. </h1>
+      <a href="{% url 'products' %}"> Continue shopping </a>
+    </section>
+  {% else %}
+    <table class="table">
+    {% for item in object.cartitem_set.all %}
+      <tr id="item-{{ item.item.id }}">
+          <td>
+            {{ item.item.get_title }}
+          </td>
+          <td>
+            <form action="." method="GET">
+              <input type="hidden" name="item" value="{{ item.item.id }}"/>
+              <input type="number" class="item-qty" name="qty" value="{{ item.quantity }}"/>
+              <input type="submit" class="btn-update btn btn-link" style="display:none;" value="Update Item"/>
+            </form>
+          </td>
+          <td id="item-line-total-{{ item.item.id }}">
+            ${{ item.line_item_total }}
+          </td>
+          <td class="text-right">
+            <a href="{{ item.remove }}"> Remove </a>
+          </td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td id="subtotal" colspan="4" class="text-right">Subtotal: ${{ object.subtotal }}</td>
+      </tr>
+    </table>
+  {% endif %}
+</section>
 {% endblock %}
