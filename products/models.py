@@ -26,10 +26,12 @@ class ProductManager(models.Manager):
         qs = (products_one | products_two).exclude(id=instance.id).distinct()
         return qs
 
+
 class Product(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True, null=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5,
+                                decimal_places=2)
     active = models.BooleanField(default=True)
     categories = models.ManyToManyField("Category", blank=True)
     default = models.ForeignKey("Category", related_name="default_category", null=True, blank=True)
@@ -47,6 +49,7 @@ class Product(models.Model):
         if img:
             return img.image.url
         return img
+
 
 class Variation(models.Model):
     product = models.ForeignKey(Product)
@@ -77,6 +80,7 @@ class Variation(models.Model):
     def get_title(self):
         return "%s - %s" %(self.product.title, self.title)
 
+
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
     product = instance
     variations = product.variation_set.all()
@@ -89,6 +93,7 @@ def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
 
 post_save.connect(product_post_saved_receiver, sender=Product)
 
+
 def image_upload_to(instance, filename):
     title = instance.product.title
     slug = slugify(title)
@@ -96,7 +101,10 @@ def image_upload_to(instance, filename):
     new_filename = "%s.%s"(instance.id, file_extension)
     return "products/%s/%s" %(slug, new_filename)
 
-# Product Images-- Incorporate pillow and ImageField to load images onto our page
+'''Product Images-- Incorporate pillow and ImageField
+to load images onto our page'''
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product)
     image = models.ImageField(upload_to="products/")
@@ -105,6 +113,7 @@ class ProductImage(models.Model):
         return self.product.title
 
 # Product Categories
+
 
 class Category(models.Model):
     title = models.CharField(max_length=120, unique=True)
@@ -116,9 +125,8 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
-
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("category_detail", kwargs={"slug":self.slug})
+        return reverse("category_detail", kwargs={"slug": self.slug})
