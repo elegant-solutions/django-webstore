@@ -1,10 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
 from .forms import SignUpForm
 from .models import SignUp
 
 
+# =========================================================================
+# ----- Custom Admin Classes
+# =========================================================================
 class SignUpAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'email', 'timestamp', 'updated']
     form = SignUpForm
@@ -12,4 +14,7 @@ class SignUpAdmin(admin.ModelAdmin):
     class Meta:
         model = SignUp
 
+# =========================================================================
+# ----- Admin Model Registration
+# =========================================================================
 admin.site.register(SignUp, SignUpAdmin)
