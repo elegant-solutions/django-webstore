@@ -9,11 +9,14 @@ from carts.models import Cart, CartItem
 
 
 class CartView(SingleObjectMixin, View):
+    """ Using Django sessions to store cart items in cookies.
+    CartView is also used to get/delete items and add up a line and overall
+    subtotal. Exception errors and HTTP request errors are accounted for. """
     model = Cart
     template_name = "carts/view.html"
 
     def get_object(self, *args, **kwargs):
-        self.request.session.set_expiry(0)  # Zero minutes to expire
+        self.request.session.set_expiry(0)  # Zero minutes to expire.
         cart_id = self.request.session.get("cart_id")
         if cart_id == None:
             cart = Cart()
