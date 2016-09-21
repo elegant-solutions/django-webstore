@@ -128,7 +128,11 @@ class CheckoutView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CheckoutView, self).get_context_data(*args, **kwargs)
+        user_can_continue = False
         if not self.request.user.is_authenticated():
-            context["user_auth"] = False
             context["login_form"] = AuthenticationForm()
+            context["next_url"] = self.request.build_absolute_uri()
+        if self.request.user.is_authenticated():
+            user_can_continue = True
+        context["user_can_continue"] = user_can_continue
         return context
