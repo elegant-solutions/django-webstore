@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from .models import UserAddress
+
 User = get_user_model()
 
 
@@ -19,3 +21,14 @@ class GuestCheckoutForm(forms.Form):
             return email2
         else:
             raise forms.ValidationError("Please confirm emails are the same.")
+
+
+class AddressForm(forms.Form):
+    billing_address = forms.ModelChoiceField(
+            queryset=UserAddress.objects.filter(type="billing"),
+            empty_label = None
+            )
+    shipping_address = forms.ModelChoiceField(
+            queryset=UserAddress.objects.filter(type="shipping"),
+            empty_label = None,
+            )

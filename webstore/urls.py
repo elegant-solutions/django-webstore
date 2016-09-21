@@ -19,6 +19,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from carts.views import CartView, ItemCountView, CheckoutView
+from invoice.views import AddressSelectFormView
 
 # =========================================================================
 # Enabling RESTful architecture with dynamic urls.
@@ -34,6 +35,7 @@ urlpatterns = [
     url(r'^cart/$', CartView.as_view(), name='cart'),
     url(r'^cart/count/$', ItemCountView.as_view(), name='item_count'),
     url(r'^checkout/$', CheckoutView.as_view(), name='checkout'),
+    url(r'^checkout/address/$', AddressSelectFormView.as_view(), name='checkout_address'),
 ]
 
 if settings.DEBUG:
