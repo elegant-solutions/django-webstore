@@ -32,3 +32,15 @@ class AddressForm(forms.Form):
             queryset=UserAddress.objects.filter(type="shipping"),
             empty_label = None,
             )
+
+
+class UserAddressForm(forms.ModelForm):
+    class Meta:
+        model = UserAddress
+        fields = [
+            'street',
+            'city',
+            'state',
+            'zipcode',
+            'type',
+        ]

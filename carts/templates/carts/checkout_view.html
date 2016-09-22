@@ -24,5 +24,33 @@
   <p class="text-center">{% trans "Not a member?" %}<a href="{% url 'registration_register' %}">{% trans "Register" %}</a></p>
 </div>
 
+{% else %}
+<section class="col-sm-4 col-sm-offset-4 text-center">
+  <p class="lead">Your Order</p>
+  <table class="table">
+    <tr>
+      <td> <strong>Cart Items: </strong><br />{% for i in order.cart.cartitem_set.all %}
+        {{ i.item.get_title }}<br />
+          {% endfor %}
+      </td>
+    <tr>
+      <td>Subtotal: {{ order.cart.subtotal }}</td>
+    </tr>
+    <tr>
+      <td>Tax Total: {{ order.cart.tax_total }}</td>
+    </tr>
+    <tr>
+      <td>Cart Total: {{ order.cart.total }}</td>
+    </tr>
+    <tr>
+      <td>Shipping: {{ order.shipping_total_price }}
+      </td>
+    </tr>
+    <tr>
+      <td>Total: {{ order.order_total }}</td>
+    </tr>
+  </table>
+</section>
+
 {% endif %}
 {% endblock %}
