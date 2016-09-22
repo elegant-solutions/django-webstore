@@ -5,7 +5,6 @@ from django.db.models.signals import pre_save, post_save, post_delete
 
 from products.models import Variation
 
-
 class CartItem(models.Model):
     """ Stores a cart item with quantity and total. """
     cart = models.ForeignKey("Cart")
