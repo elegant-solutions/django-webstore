@@ -53,6 +53,8 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
       <a href="{% url 'products' %}"> Continue shopping </a>
     </section>
   {% else %}
+  <section class="col-sm-8 col-sm-offset-2">
+    <h1> Your Cart </h1>
     <table class="table">
     {% for item in object.cartitem_set.all %}
       <tr id="item-{{ item.item.id }}">
@@ -70,7 +72,7 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
             ${{ item.line_item_total }}
           </td>
           <td class="text-right">
-            <a href="{{ item.remove }}"> Remove </a>
+            <a class="btn btn-md btn-warning" href="{{ item.remove }}"> Remove </a>
           </td>
       </tr>
       {% endfor %}
@@ -78,12 +80,16 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
         <td id="subtotal" colspan="4" class="text-right">Subtotal: ${{ object.subtotal }}</td>
       </tr>
       <tr>
-        <td colspan="4" class="text-right">Tax (Estimated): <span id='taxtotal'> ${{ object.tax_total }}</span></td>
+        <td colspan="4" class="text-right">Tax (Estimated): <span id="taxtotal"> ${{ object.tax_total }}</span></td>
       </tr>
       <tr>
-        <td colspan="4" class="text-right">Total: <span id='carttotal'> ${{ object.total }}</span></td>
+        <td colspan="4" class="text-right">Total: <span id="carttotal"> ${{ object.total }}</span></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-right"><a class="btn btn-md btn-warning" href="{% url 'checkout' %}"> Checkout </a></td>
       </tr>
     </table>
+  </section>
   {% endif %}
 </section>
 {% endblock %}

@@ -26,7 +26,7 @@
 
 {% else %}
 <section class="col-sm-4 col-sm-offset-4 text-center">
-  <p class="lead">Your Order</p>
+  <p class="lead">Order Summary</p>
   <table class="table">
     <tr>
       <td> <strong>Cart Items: </strong><br />{% for i in order.cart.cartitem_set.all %}
@@ -51,6 +51,15 @@
     </tr>
   </table>
 </section>
+<section class="col-sm-4 col-sm-offset-4 text-center">
+  <p><strong>Billing to</strong><br/>
+  {{ order.billing_address.get_address }}
+  </p><br/>
+  <p><strong>Shipping to</strong><br/>
+  {{ order.shipping_address.get_address }}
+  </p><br/>
+  <p><strong>Complete Order</strong><br/></p>
 
+</section>
 {% endif %}
 {% endblock %}
