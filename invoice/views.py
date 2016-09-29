@@ -2,10 +2,41 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView, CreateView
-# Create your views here.
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from .forms import AddressForm, UserAddressForm
-from .models import UserAddress, UserCheckout
+from .models import UserAddress, UserCheckout, Order
+from .mixins import CartOrderMixin, LoginRequiredMixin
+
+
+class OrderDetail(DetailView):
+    model = Order
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            user_check_id = self.request.session.get("user_checkout_id")
+            user_checkout = UserCheckout.objects.get(id=user_check_id)
+        except UserCheckout.DoesNotExist:
+            user_checkout = UserCheckout.objects.get(user=request.user)
+        except:
+            user_checkout = None
+
+        obj = self.get_object()
+        if obj.user == user_checkout and user_checkout is not None:
+            return super(OrderDetail, self).dispatch(request, *args, **kwargs)
+        else:
+            raise Http404
+
+
+class OrderList(LoginRequiredMixin, ListView):
+    queryset = Order.objects.all()
+
+    def get_queryset(self):
+        # user_check_id = self.request.user.id
+        user_check_id = self.request.session.get("user_checkout_id")
+        user_checkout = UserCheckout.objects.get(id=user_check_id)
+        return super(OrderList, self).get_queryset().filter(user=user_checkout)
 
 
 class UserAddressCreateView(CreateView):
@@ -23,7 +54,7 @@ class UserAddressCreateView(CreateView):
         return super(UserAddressCreateView, self).form_valid(form, *args, **kwargs)
 
 
-class AddressSelectFormView(FormView):
+class AddressSelectFormView(CartOrderMixin, FormView):
     form_class = AddressForm
     template_name = "invoice/address_select.html"
 
@@ -61,8 +92,10 @@ class AddressSelectFormView(FormView):
     def form_valid(self, form, *args, **kwargs):
         billing_address = form.cleaned_data["billing_address"]
         shipping_address = form.cleaned_data["shipping_address"]
-        self.request.session["billing_address_id"] = billing_address.id
-        self.request.session["shipping_address_id"] = shipping_address.id
+        order = self.get_order()
+        order.billing_address = billing_address
+        order.shipping_address = shipping_address
+        order.save()
         form = super(AddressSelectFormView, self).form_valid(form, *args, **kwargs)
         return form
 
