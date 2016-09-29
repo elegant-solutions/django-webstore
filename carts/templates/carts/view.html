@@ -31,7 +31,7 @@ to the user via vanilla jQuery and AJAX calls to the cart URL. -->
         }
         if (data.total_items === 0) {
           $(".table").fadeOut();
-          $(".main-content").text("Cart is empty.")
+          $(".main-content").html("<section class='col-sm-6 col-sm-offset-3 text-center'><h1> Your cart is empty. </h1><a href='{% url "products" %}'>Continue shopping </a></section>");
         }
         updateCartItemCount();
       },
