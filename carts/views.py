@@ -184,8 +184,9 @@ class CheckoutFinalView(CartOrderMixin, View):
     def post(self, request, *args, **kwargs):
         order = self.get_order()
         if request.POST.get("payment_token") == "ABC":
-            print("PRINTING")
-            print order.cart.items.all()
+            order.mark_completed()
+            del request.session["cart_id"]
+            del request.session["order_id"]
         return redirect("checkout")
 
     def get(self, request, *args, **kwargs):
