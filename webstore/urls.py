@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from carts.views import CartView, ItemCountView, CheckoutView
+from carts.views import CartView, ItemCountView, CheckoutView, CheckoutFinalView
 from invoice.views import AddressSelectFormView, UserAddressCreateView
 
 # =========================================================================
@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^checkout/$', CheckoutView.as_view(), name='checkout'),
     url(r'^checkout/address/$', AddressSelectFormView.as_view(), name='checkout_address'),
     url(r'^checkout/address/add/$', UserAddressCreateView.as_view(), name='user_address_create'),
+    url(r'^checkout/final/$', CheckoutFinalView.as_view(), name='checkout_final'),
 
 ]
 

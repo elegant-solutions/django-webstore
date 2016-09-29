@@ -59,8 +59,13 @@
   <p><strong>Shipping to</strong><br/>
   {{ order.shipping_address.get_address }}
   </p><br/>
-  <a href="{% url 'user_address_create' %}">Change an address</a><br/>
-  <p><strong>Complete Order</strong><br/></p>
+  <a href="{% url 'user_address_create' %}">Change an address</a><br/><br />
+  <section>
+    <form method="POST" action="{% url 'checkout_final' %}">{% csrf_token %}
+      <input type="hidden" name="payment_token" value="ABC">
+      <button class="btn btn-md" type="submit">Complete Order</button><br/>
+    </form>
+  </section>
 
 </section>
 {% endif %}
