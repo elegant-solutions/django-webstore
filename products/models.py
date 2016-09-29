@@ -2,11 +2,11 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+
+
 # =========================================================================
 # Q Lookup uses the queryset API in Django to query the product model
 # =========================================================================
-
-
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
