@@ -4,6 +4,30 @@ Strange Sweets is a webstore built with Python, Django, and jQuery, and deployed
 
 You can find our site deployed at https://django-sweets-store.herokuapp.com
 
+## Developer Instructions
+
+To download our site locally, do the following in your command line:
+
+1. `git clone https://github.com/elegant-solutions/django-webstore.git`
+2. `pip install virtualenv`
+3. `mkvirutalenv store`
+4. `cd store`
+5. `source bin/activate`
+6. `pip install -r requirements.txt`
+7. `cd` into `django-webstore`
+8. `python manage.py makemigrations`
+9. `python manage.py migrate`
+10. `python manage.py runserver`
+11. Congrats! You should be able to go to `localhost:8000` in your browser and view our site!
+
+## Testing the Braintree API via Our Site
+
+We are currently using a sandbox account with our Braintree API, so we don't take actual credit cards as
+we are still testing and improving this project. To see how the payments work, use this test credit card information:
+
+- Credit Card: 4111 1111 1111 1111
+- Expiration Date: 11/19
+
 ## Features
 
 - Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
@@ -16,15 +40,16 @@ You can find our site deployed at https://django-sweets-store.herokuapp.com
 - Key features loaded asynchronously using Ajax
 - RESTful framework implemented using Django routing
 - Responsive, mobile-first design
+- A fully functional order form. Once the user adds items to their cart, they should be able to proceed to an order form where they can review and modify their order, if need be, add their billing and shipping address, and process their payment using the Braintree API.
 - *Deployed using Heroku, thanks to Britt's incredibly hard work and with help from Rick, Chris, and Munir.*
 
 ## Future Development
 
-In time we will implement the following features:
+In time, we will implement the following features:
 
 - A fully functional login and registration feature, with full email and password authentication and email marketing capabilities
-- A fully functional order form. Once the user adds items to their cart, they should be able to proceed to an order form where they can review and modify their order, if need be, add their billing and shipping address, and process their payment using the Braintree API. The user would then receive an email confirmation of their order status.
-- More developed styling so that the page both looks and functions like a real-world e-commerce site
+- The user would then receive an email confirmation of their order status.
+- More developed styling so that the page both looks and functions like a real-world e-commerce site.
 - Adding/improving analytics, testing, SEO, and speed/optimization
 - A chat feature, so that if a user has been browsing products for X amount of time, a chat box would open up asking if they have any questions that can be answered by either a store employee or by a bot.
 
