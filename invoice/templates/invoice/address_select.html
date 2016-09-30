@@ -11,6 +11,10 @@
 
   {{ form|crispy }}
     <input class="btn btn-default" type="submit" value="Select">
+    <br/>
+    <section>
+      <a href="{% url 'user_address_create' %}">Add New Address</a>
+    </section>
   </form>
 </section>
 {% endblock %}
