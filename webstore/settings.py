@@ -20,9 +20,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-#TODO: Remove secret key from version controlled files
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = "f%b6yp%1em(1rxfpfu1!!ke%z62b)kpj*)qql66n$2b(%d$quk"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'crispy_forms',
     'registration',
     'subscribers',
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'webstore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,23 +128,22 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-#TODO: Remove sensitive email information from public settings file
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_USER = 'strangesweets301@gmail.com'
+EMAIL_HOST_PASSWORD = 'codefellows'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, '../staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, '../static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 ]
 
 # Simplified static file serving.
@@ -161,9 +160,3 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-
-# Braintree Payments Details
-BRAINTREE_PUBLIC = os.environ["BRAINTREE_PUBLIC"]
-BRAINTREE_PRIVATE = os.environ["BRAINTREE_PRIVATE"]
-BRAINTREE_MERCHANT_ID = os.environ["BRAINTREE_MERCHANT_ID"]
-BRAINTREE_ENVIRONMENT = os.environ["BRAINTREE_ENVIRONMENT"]
