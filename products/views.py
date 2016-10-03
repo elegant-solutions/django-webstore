@@ -10,6 +10,7 @@ from django.db.models import Q
 from .forms import VariationInventoryFormSet, ProductFilterForm
 
 from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from .mixins import StaffRequiredMixin
@@ -23,7 +24,8 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 class CategoryRetrieveAPIView(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
