@@ -5,3 +5,9 @@ from .base import *
 DEBUG = True
 
 INSTALLED_APPS += ('debug_toolbar', 'rest_framework', 'django_filters')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}

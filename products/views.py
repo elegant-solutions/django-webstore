@@ -8,7 +8,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
 from .forms import VariationInventoryFormSet, ProductFilterForm
+
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+
 from .mixins import StaffRequiredMixin
 from .models import Product, Category
 from .serializers import CategorySerializer, ProductSerializer, ProductDetailSerializer
@@ -20,6 +23,7 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 class CategoryRetrieveAPIView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
