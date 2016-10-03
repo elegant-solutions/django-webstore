@@ -15,12 +15,14 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 from .mixins import StaffRequiredMixin
 from .models import Product, Category
+from .pagination import ProductPagination, CategoryPagination
 from .serializers import CategorySerializer, ProductSerializer, ProductDetailSerializer
 
 
 class CategoryListAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    pagination_class = CategoryPagination
 
 
 class CategoryRetrieveAPIView(generics.RetrieveAPIView):
@@ -31,9 +33,9 @@ class CategoryRetrieveAPIView(generics.RetrieveAPIView):
 
 
 class ProductListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
 
 class ProductRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
