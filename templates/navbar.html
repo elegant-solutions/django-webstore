@@ -19,7 +19,7 @@
         <li><a href="{% url 'about' %}">About</a></li>
         <form class="navbar-form navbar-left" method="GET" role="search" action="{% url 'products' %}">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" name="q">
+            <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
           </div>
         </form>
       </ul>
