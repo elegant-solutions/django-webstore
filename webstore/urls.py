@@ -23,6 +23,7 @@ from invoice.views import (
                         AddressSelectFormView,
                         UserAddressCreateView,
                         OrderList,
+                        UserCheckoutAPI,
                         OrderDetail
                         )
 from products.views import (
@@ -61,6 +62,7 @@ urlpatterns += [
     url(r'^api/categories/(?P<pk>\d+)/$', CategoryRetrieveAPIView.as_view(), name='category_detail_api'),
     url(r'^api/products/$', ProductListAPIView.as_view(), name='products_api'),
     url(r'^api/products/(?P<pk>\d+)/$', ProductRetrieveAPIView.as_view(), name='product_detail_api'),
+    url(r'^api/user/checkout/$', UserCheckoutAPI.as_view(), name='user_checkout_api'),
 ]
 
 if settings.DEBUG:
