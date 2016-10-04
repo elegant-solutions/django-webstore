@@ -1,22 +1,26 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib import messages
-from django_filters import FilterSet, CharFilter, NumberFilter
 from django.http import Http404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
+from .filters import ProductFilter
 from .forms import VariationInventoryFormSet, ProductFilterForm
-
-from rest_framework import generics
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-
 from .mixins import StaffRequiredMixin
 from .models import Product, Category
 from .pagination import ProductPagination, CategoryPagination
+from rest_framework import filters
+from rest_framework import generics
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .serializers import CategorySerializer, ProductSerializer, ProductDetailSerializer
+
+
+# =========================================================================
+# Enabling API views by category and product
+# =========================================================================
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -36,6 +40,14 @@ class ProductListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter,
+                    filters.OrderingFilter,
+                    filters.DjangoFilterBackend
+                    ]
+    search_fields = ["title", "description"]
+    ordering_fields = ["title", "id"]
+    filter_class = ProductFilter
+
 
 class ProductRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
@@ -64,24 +76,6 @@ class CategoryDetailView(DetailView):
 		products = ( product_set | default_products ).distinct()
 		context["products"] = products
 		return context
-
-
-class ProductFilter(FilterSet):
-	title = CharFilter(name='title', lookup_type='icontains', distinct=True)
-	category = CharFilter(name='categories__title', lookup_type='icontains', distinct=True)
-	category_id = CharFilter(name='categories__id', lookup_type='icontains', distinct=True)
-	min_price = NumberFilter(name='variation__price', lookup_type='gte', distinct=True) # (some_price__gte=somequery)
-	max_price = NumberFilter(name='variation__price', lookup_type='lte', distinct=True)
-	class Meta:
-		model = Product
-		fields = [
-			'min_price',
-			'max_price',
-			'category',
-			'title',
-			'description',
-		]
-
 
 def product_list(request):
 	qs = Product.objects.all()
