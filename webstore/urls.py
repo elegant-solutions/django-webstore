@@ -25,7 +25,12 @@ from invoice.views import (
                         OrderList,
                         OrderDetail
                         )
-
+from products.views import (
+                        CategoryListAPIView,
+                        CategoryRetrieveAPIView,
+                        ProductListAPIView,
+                        ProductRetrieveAPIView,
+                        )
 # =========================================================================
 # Enabling RESTful architecture with dynamic urls.
 # Overall url patterns for webstore.
@@ -46,6 +51,15 @@ urlpatterns = [
     url(r'^checkout/address/add/$', UserAddressCreateView.as_view(), name='user_address_create'),
     url(r'^checkout/final/$', CheckoutFinalView.as_view(), name='checkout_final'),
 
+]
+
+#API Patterns
+urlpatterns += [
+
+    url(r'^api/categories/$', CategoryListAPIView.as_view(), name='categories_api'),
+    url(r'^api/categories/(?P<pk>\d+)/$', CategoryRetrieveAPIView.as_view(), name='category_detail_api'),
+    url(r'^api/products/$', ProductListAPIView.as_view(), name='products_api'),
+    url(r'^api/products/(?P<pk>\d+)/$', ProductRetrieveAPIView.as_view(), name='product_detail_api'),
 ]
 
 if settings.DEBUG:
