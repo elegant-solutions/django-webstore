@@ -6,21 +6,41 @@ from django.views.generic.list import ListView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
+
 from .filters import ProductFilter
 from .forms import VariationInventoryFormSet, ProductFilterForm
 from .mixins import StaffRequiredMixin
 from .models import Product, Category
 from .pagination import ProductPagination, CategoryPagination
+
 from rest_framework import filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework.reverse import reverse as api_reverse
+from rest_framework.views import APIView
 from .serializers import CategorySerializer, ProductSerializer, ProductDetailSerializer
 
 
 # =========================================================================
 # Enabling API views by category and product
 # =========================================================================
+
+
+class APIHomeView(APIView):
+    def get(self, request, format=None):
+        data = {
+            "products": {
+                        "count": Product.objects.all().count(),
+                        "url": api_reverse("products_api", request=request)
+                        },
+            "categories": {
+                        "count": Category.objects.all().count(),
+                        "url": api_reverse("categories_api", request=request),
+                        }
+        }
+        return Response(data)
 
 
 class CategoryListAPIView(generics.ListAPIView):
