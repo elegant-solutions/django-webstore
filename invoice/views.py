@@ -55,7 +55,6 @@ class UserCheckoutMixin(object):
 
         return data
 
-
 class UserCheckoutAPI(UserCheckoutMixin, APIView):
     permission_classes = [AllowAny]
 
