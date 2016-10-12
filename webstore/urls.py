@@ -52,7 +52,7 @@ urlpatterns = [
     url(r'^checkout/address/$', AddressSelectFormView.as_view(), name='checkout_address'),
     url(r'^checkout/address/add/$', UserAddressCreateView.as_view(), name='user_address_create'),
     url(r'^checkout/final/$', CheckoutFinalView.as_view(), name='checkout_final'),
-
+    url(r'^docs/', include('rest_framework_docs.urls')),
 ]
 
 #API Patterns
