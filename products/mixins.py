@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.http import Http404
 
 
-class staffRequiredMixin(object):
+class StaffRequiredMixin(object):
     @classmethod
     def as_view(self, *args, **kwargs):
         view = super(StaffRequiredMixin, self).as_view(*args, **kwargs)
