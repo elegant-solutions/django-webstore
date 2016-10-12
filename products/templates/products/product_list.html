@@ -3,7 +3,7 @@
 
 {% block content %}
 <!-- Dynamically loads all products on the home page, and includes products.html which captures image thumbnails -->
-<h1 class="allProds"> All Products <small><a class="pull-right" href="{% url 'categories' %}">Categories</a></small></h1>
+<h3 class="allProds"> Our Products <a class="pull-right" href="{% url 'categories' %}">Categories</a></h3>
 
 {% include "products/products.html" with object_list=object_list %}
 
