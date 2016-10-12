@@ -11,12 +11,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'home' %}">Strange Sweets</a>
+      <a class="navbar-brand" href="{% url 'home' %}"><img src="https://www.dropbox.com/s/c9occ3q6puwr3fa/logo.jpg?raw=1" alt="Home and Lifestyle Company"></a>
       <!-- <img src="{% static 'img/photofile.format' %}"/> -->
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'about' %}">About</a></li>
+        <!-- <li><a href="{% url 'about' %}">About</a></li> -->
         <form class="navbar-form navbar-left" method="GET" role="search" action="{% url 'products' %}">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" name="q">

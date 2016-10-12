@@ -3,20 +3,7 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
-{% block head_title %}Welcome | Strange Sweets {% endblock %}
-
-{% block jumbotron %}
-{% if not request.user.is_authenticated %}
-
-  <!-- Main component for a primary marketing message or call to action -->
-  <section class="jumbotron">
-    <h1>Strange Sweets</h1>
-    <p>Ever eaten a bug? Tasted a ball bearing? Now's your chance. Our handmade, locally sourced, curated collection of exquisite delicacies from around the world are yours for the tasting.</p>
-    <p>Our top of the line, artificially intelligent robots painstakingly hand craft these organic strange sweets. Rest assured, we put in every BIT of our heart into these goodies. Get ready to take a BYTE out of our offerings.</p>
-    <a class="btn btn-lg btn-primary" href="/categories/" role="button">What kinds of sweets? &raquo;</a>
-  </section>
-{% endif %}
-{% endblock %}
+{% block head_title %}Welcome | Home & Lifestyle Company {% endblock %}
 
 {% block content %}
 
