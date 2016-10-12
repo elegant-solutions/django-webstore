@@ -1,8 +1,10 @@
-# What is Strange Sweets?
+# What is this Django Webstore?
 
-Strange Sweets is a webstore built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, and Rachael Wisecarver.
+This webstore was built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, Rachael Wisecarver, and Sonnet Lauberth. We are using Django REST Framework for our API.
 
-You can find our site deployed at https://django-sweets-store.herokuapp.com
+You can find our site deployed at: https://django-sweets-store.herokuapp.com
+You can read our API docs at: https://django-sweets-store.herokuapp.com/docs
+You can read our developer docs at: http://django-webstore.readthedocs.io/en/latest/
 
 ## Developer Instructions
 
@@ -13,8 +15,8 @@ To download our site locally, do the following in your command line:
 3. `mkvirutalenv store`
 4. `cd store`
 5. `source bin/activate`
-6. `pip install -r requirements.txt`
-7. `cd` into `django-webstore`
+6. `cd django-webstore`
+7. `pip install -r requirements.txt`
 8. `python manage.py makemigrations`
 9. `python manage.py migrate`
 10. `python manage.py runserver`
