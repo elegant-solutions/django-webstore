@@ -3,26 +3,19 @@ body {
 }
 
 .navbar-brand {
-  font-family: "Shrikhand", cursive;
-  font-size: 30px;
+  font-family: "Lato", cursive;
+  font-size: 22px;
+  margin-top: 0px;
 }
 
-.jumbotron h1 {
-  font-family: "Shrikhand", cursive;
-  font-size: 80px;
-}
 .text-align-center {
   text-align: center;
 }
 
-.jumbotron {
-  background-color: #e5fff2;
-}
-
 .btn {
-  background-color: #ff9998 !important;
+  background-color: #A9A9A9 !important;
   border-style: none;
-  color: black;
+  color: #fff;
 }
 
 img {
@@ -35,7 +28,7 @@ img {
 
 a {
   color: black;
-  font-size: 25px;
+  font-size: 16px;
   text-decoration: none !important;
 }
 
