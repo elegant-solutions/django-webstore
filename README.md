@@ -2,9 +2,9 @@
 
 This webstore was built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, Rachael Wisecarver, and Sonnet Lauberth. We are using Django REST Framework for our API.
 
-You can find our site deployed at: https://django-sweets-store.herokuapp.com
-You can read our API docs at: https://django-sweets-store.herokuapp.com/docs
-You can read our developer docs at: http://django-webstore.readthedocs.io/en/latest/
+### You can find our site deployed at: https://django-sweets-store.herokuapp.com
+### You can read our API docs at: https://django-sweets-store.herokuapp.com/docs
+### You can read our developer docs at: http://django-webstore.readthedocs.io/en/latest/
 
 ## Developer Instructions
 
