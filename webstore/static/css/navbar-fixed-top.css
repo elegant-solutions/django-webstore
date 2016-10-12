@@ -5,8 +5,8 @@ body {
 
 .navbar-fixed-top {
   margin-bottom: 19px;
-  background-color: #98ffcc;
-  border-color: #65ffbb;
+  background-color: #fff;
+  border-color: lightgrey;
 }
 
 .navbar-default .navbar-brand {

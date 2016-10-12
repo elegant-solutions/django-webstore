@@ -21,7 +21,7 @@
         data: formData,
         success: function(data) {
           var $notification = $('#jquery-message').html("{{ product }} added to your cart!").fadeIn();
-          $notification.fadeOut(1000);
+          $notification.fadeOut(3000);
           updateCartItemCount();
         },
         error: function(response, error) {
@@ -36,18 +36,20 @@
 <!-- Dynamically loads product title, description, image, url for selected product -->
 <section class="row">
   <section class="col-sm-8">
-    <h2>{{ object.title }}</h2>
+    <h3>{{ object.title }}</h3>
+    <br>
     {% if object.get_image_url %}
     <section>
-      <img class="img-responsive" src="{{ object.get_image_url }}"/>
+      <img class="img-responsive img-rounded" src="{{ object.get_image_url }}"/>
     </section>
     {% endif %}
+      <br>
       <p class="lead">{{ object.description }}</p>
   </section>
 
   <!-- Product Sidebar, displays form for adding product variation to cart-->
   <section class="col-sm-4">
-    <h3 id="price"> {{ object.price }} </h3>
+    <h3 id="price"> ${{ object.price }} </h3>
     <form id="add-form" method="GET" action="{% url 'cart' %}">
       <p id="jquery-message" class="bg-success"></p>
       <select name="item" class="form-control variation_select">
@@ -57,6 +59,7 @@
         </option>
         {% endfor %}
       </select>
+      <br>
       <input class="form-control" type="number" name="qty" value="1" />
       <br />
       <input id="submit-btn" type="submit" class="btn btn-default add-cart" value="Add to Cart"/>
@@ -65,12 +68,12 @@
     <hr />
 
     <!-- Related Products loaded based on item category-->
-    <h3> Related Products </h3><hr/>
+    <h4> Related Products </h4><hr/>
     <section class="row">
     {% for product in related %}
       <section class="col-sm-6 thumbnail text-center">
         {% if product.get_image_url %}
-        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive" src="{{ product.get_image_url }}"/></a><br/>
+        <a href="{{ product.get_absolute_url }}"><img id="img" class="img-responsive img-rounded" src="{{ product.get_image_url }}"/></a><br/>
           {% endif %}
           <section class="caption">
             <h4><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h4>
