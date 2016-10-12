@@ -11,6 +11,7 @@ django-filter==0.11.0
 django-registration-redux==1.2
 djangorestframework==3.2.3
 djangorestframework-jwt==1.7.2
+drfdocs==0.0.11
 enum34==1.1.6
 flake8==3.0.4
 gunicorn==19.6.0
