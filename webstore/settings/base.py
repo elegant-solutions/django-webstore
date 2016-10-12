@@ -8,7 +8,6 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-from secrets import *
 import os
 import dj_database_url
 
@@ -22,7 +21,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 #TODO: Remove secret key from version controlled files
 # # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -163,7 +162,7 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
 # Braintree Payments Details
-# BRAINTREE_PUBLIC = os.environ["BRAINTREE_PUBLIC"]
-# BRAINTREE_PRIVATE = os.environ["BRAINTREE_PRIVATE"]
-# BRAINTREE_MERCHANT_ID = os.environ["BRAINTREE_MERCHANT_ID"]
-# BRAINTREE_ENVIRONMENT = os.environ["BRAINTREE_ENVIRONMENT"]
+BRAINTREE_PUBLIC = os.environ["BRAINTREE_PUBLIC"]
+BRAINTREE_PRIVATE = os.environ["BRAINTREE_PRIVATE"]
+BRAINTREE_MERCHANT_ID = os.environ["BRAINTREE_MERCHANT_ID"]
+BRAINTREE_ENVIRONMENT = os.environ["BRAINTREE_ENVIRONMENT"]

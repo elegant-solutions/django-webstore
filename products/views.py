@@ -13,6 +13,7 @@ from .mixins import StaffRequiredMixin
 from .models import Product, Category
 from .pagination import ProductPagination, CategoryPagination
 
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework import filters
 from rest_framework import generics
 from rest_framework.authentication import SessionAuthentication
@@ -26,7 +27,6 @@ from .serializers import CategorySerializer, ProductSerializer, ProductDetailSer
 # =========================================================================
 # Enabling API views by category and product
 # =========================================================================
-
 
 class APIHomeView(APIView):
     def get(self, request, format=None):
@@ -50,7 +50,7 @@ class CategoryListAPIView(generics.ListAPIView):
 
 
 class CategoryRetrieveAPIView(generics.RetrieveAPIView):
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [JSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
