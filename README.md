@@ -1,6 +1,6 @@
 # What is this Django Webstore?
 
-This webstore was built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, Rachael Wisecarver, and Sonnet Lauberth. We are using Django REST Framework for our API.
+This webstore was built with Python, Django, and jQuery, and deployed via Heroku. It was developed by Keith Brandtjen, Britt Johnson, and Rachael Wisecarver. We are using Django REST Framework for our API.
 
 ### You can find our site deployed at: https://django-sweets-store.herokuapp.com
 ### You can read our API docs at: https://django-sweets-store.herokuapp.com/docs
